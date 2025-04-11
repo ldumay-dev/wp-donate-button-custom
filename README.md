@@ -1,0 +1,41 @@
+# Cadre de l'application - Fonctionnalités et exigences
+
+- **La maintenance du module** :
+    - **L'installation** :
+        - Le module est installé dans le répertoire des modules de l'application.
+    - **L'activation** :
+        - Le module est activé dans le back-office de l'application.
+        - Le module crée une table dédiée de configuration dans la base de données de l'application.
+    - **La mise à jour** :
+        - Le module est mis à jour dans le répertoire des modules de l'application.
+        - Le module met à jour la table de configuration dans la base de données de l'application.
+    - **La désactivation** :
+        - Le module est désactivé dans le back-office de l'application.
+    - **La désintallation** :
+        - Le module est désinstallé du répertoire des modules de l'application.
+        - Le module supprime la table de configuration dans la base de données de l'application.
+- **Le rendu et la configuration du module** :
+    - **Le rendu** :
+        - Le module est rendu dans le front-end de l'application.
+        - Le rendu affiche un bouton de don.
+        - Le bouton de don a une icone, un titre et d'autres boutons d'action personnalisable.
+        - Le bouton de don est possède un effet de survol.
+        - Le bouton a une position fixe personnalisable.
+        - Le bouton de don est visible sur toutes les pages de l'application.
+    - **La configuration** :
+        - Le module est configurable depuis le back-office de l'application.
+        - Le module peux activer ou désactiver le bouton de don.
+        - Le module possède une section de configuration du thème du bouton de don.
+            - Le bouton de don possède une position fixe personnalisable.
+            - Le bouton de don possède un effet de survol personnalisable.
+            - Le bouton de don possède une couleur personnalisable.
+        - Le module possède une section de configuration des informations du bouton de don.
+            - Le bouton de don possède une icone personnalisable.
+            - Le bouton de don possède un titre personnalisable.
+        - Le module possède une section de configuration des bouton d'action du bouton de don.
+            - Le bouton de don possède un nombre de bouton d'action personnalisable.
+            - Un bouton d'action est un bouton qui permet d'effectuer une action.
+            - Un bouton d'action possède un titre personnalisable, avec une nombre de caractères maximum.
+            - Un bouton d'action possède une url personnalisable.
+    - **La sauvegarde des données** :
+        - Les modifications sont sauvegardées dans la base de données de l'application, dans une table de configuration pour le module.
