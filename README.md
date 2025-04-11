@@ -30,8 +30,9 @@ Le module **WP Donate Button Custom** est un module WordPress qui permet d'ajout
         - Le bouton de don est visible sur toutes les pages du front-office du front-end de WordPress.
     - **Les statistiques** :
         - **Widget de statistiques** :
-            - Le module dispose d'un widget de statistiques.
-            - Le widget de statistiques affiche le nombre de clics sur le bouton de don.
+            - Le module dipose de deux sections : raccourcis et statistiques.
+                - La section raccourci permet d'afficher les raccourcis vers les pages du module.
+                - La section statistiques affiche le nombre de clics sur le bouton de don.
     - **La configuration** :
         - Le module est configurable depuis le back-office de WordPress.
         - Le module peux activer ou désactiver le bouton de don.
@@ -74,6 +75,7 @@ Le module **WP Donate Button Custom** est un module WordPress qui permet d'ajout
 │   │   ├── back-office
 │   │   │   ├── about.php
 │   │   │   ├── capabilities.php
+│   │   │   ├── navigation.php
 │   │   │   ├── roles.php
 │   │   │   ├── settings.php
 │   │   │   ├── shortcode.php

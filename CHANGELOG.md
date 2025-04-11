@@ -4,6 +4,17 @@
 
 - 
 
+## [0.0.3] - Mise à jour de la base du module
+
+- Mise à jour de tout les fichiers de démarrage.
+- Mise en place des roles et des capacités.
+- Mise en place du widget :
+    - Ajout de raccourcis vers les pages du module.
+    - Ajout d'une section de statistiques.
+- Mise en place de la navigation dans le back-office :
+    - Ajout dans la barre d'administration.
+    - Ajout dans le menu d'administration.
+
 ## [0.0.2] - Mise à jour de la base du module
 
 - Agrandissement de la base du module.
