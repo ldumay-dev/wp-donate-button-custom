@@ -4,6 +4,14 @@
 
 - 
 
+## [0.0.4] - Mise à jour de la base du module
+
+- Mise à jour du fichier de d'activation et de désactivation du module.
+- Mise à jour de la base du widget.
+- Mise à jour de la barre de navigation.
+- Mise à jour de la page de configuration.
+- Mise à jour du rendu du bouton de don dans le Front-office du Front-end.
+
 ## [0.0.3] - Mise à jour de la base du module
 
 - Mise à jour de tout les fichiers de démarrage.

@@ -70,7 +70,3 @@
             );
         }
     }
-
-    // --- [ Enablers ] ---
-    // Enable the widget
-    add_action('wp_dashboard_setup', 'wp_donate_button_custom_add_dashboard_widget');

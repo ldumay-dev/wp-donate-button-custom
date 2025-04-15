@@ -117,9 +117,3 @@
             $admin_bar->add_node($args);
         }
     }
-
-    // --- [ Enablers ] ---
-    // Enable the menu
-    add_action('admin_menu', 'wp_donate_button_custom_admin_menu');
-    // Enable the shortcut
-    add_action('admin_bar_menu', 'wp_donate_button_custom_admin_bar_menu', 90);

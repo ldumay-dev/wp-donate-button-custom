@@ -19,10 +19,10 @@
 		exit;
 	}
 
+     // === [ Constants et imports du module ] ===
      // Variables
      define('WP_DBC_PATH', plugin_dir_path(__FILE__));
      define('WP_DBC_URL', plugin_dir_url(__FILE__));
-
      // - - - [ Constants and global variables ] - - -
 	// set global variable for current user.
 	global $current_logged_in_wp_user;
@@ -35,13 +35,10 @@
           WP_DBC_PATH, // Plugin directory path
           WP_DBC_URL, // Plugin directory url
      );
-
      // Check if the function is not already defined
      if ( ! function_exists( 'is_plugin_active' ) ) {
           include_once( ABSPATH.'wp-admin/includes/plugin.php' );
      }
-
-     // Includes with order
      // => Core
      require_once WP_DBC_PATH.'src/core/classes/wp-donate-button-custom.php';
      require_once WP_DBC_PATH.'src/core/functions/wp-donate-button-custom.php';
@@ -68,37 +65,53 @@
      // => Translation
      // require_once WP_DBC_PATH.'src/languages/wp-donate-button-custom.php';
 
-     // - - - [ Hooks ] - - -
-		// NB : I think, the hooks can be used only in this file.
+     // === [ Activation du module ] ===
+     // Enable the initialisation
+     register_activation_hook(__FILE__, "wp_donate_button_custom_enable");
+     // Enable the capabilities
+     // add_action('admin_init', 'wp_donate_button_custom_add_capabilities');
+     register_activation_hook(__FILE__, 'wp_donate_button_custom_add_capabilities');
+     // Enable the roles
+     register_activation_hook(__FILE__, 'wp_donate_button_custom_create_custom_role');
+     register_activation_hook(__FILE__, 'wp_donate_button_custom_update_administrator_capabilities');
 
-          /*
+     /*
+     // Database initialization
+     register_activation_hook(__FILE__, 'wp_donate_button_custom_join_class_page');
+     // -> Update
+     add_action('upgrader_process_complete', 'wp_donate_button_custom_update', 10, 2);
+     // -> Uninstall
+     // Register uninstall hook
+     register_uninstall_hook(__FILE__, 'wp_donate_button_custom_class_page');
+     // Register uninstall hook
+     register_uninstall_hook(__FILE__, 'wp_donate_button_custom_uninstall_cleanup');
+     */
 
-		// => The hooks for the activation, update and uninstall
-		// -> Activation
-		// Plugin activation
-		register_activation_hook( __FILE__, "wp_donate_button_custom_activation" );
-		// Database initialization
-		register_activation_hook(__FILE__, 'wp_donate_button_custom_join_class_page');
-		// -> Update
-		add_action('upgrader_process_complete', 'wp_donate_button_custom_update', 10, 2);
-		// -> Uninstall
-		// Register uninstall hook
-		register_uninstall_hook(__FILE__, 'wp_donate_button_custom_class_page');
-		// Register uninstall hook
-		register_uninstall_hook(__FILE__, 'wp_donate_button_custom_uninstall_cleanup');
 
-          */
+     // === [ Démarrage du module ] ===
+     // --- [ Front-end - Front-office ] ---
+     // Charger Dashicons
+     add_action('wp_enqueue_scripts', 'wp_donate_button_custom_enqueue_dashicons');
+     // Afficher un bouton sur toutes les pages vitrines de WordPress
+     add_action( 'wp_footer', 'wp_donate_button_custom_render_button' );
+     // Enqueue the CSS and JS files
+     add_action( 'wp_enqueue_scripts', 'wp_donate_button_custom_enqueue_styles' );
+     add_action( 'wp_enqueue_scripts', 'wp_donate_button_custom_enqueue_scripts' );
+     // --- [ Front-end - Back-office ] ---
+     // Enable the menu
+     add_action('admin_menu', 'wp_donate_button_custom_admin_menu');
+     // Enable the shortcut
+     add_action('admin_bar_menu', 'wp_donate_button_custom_admin_bar_menu', 90);
+     // Enable the admin page
+     add_action('admin_init', 'wp_donate_button_custom_page_admin_init');
+     // Enable the widget
+     add_action('wp_dashboard_setup', 'wp_donate_button_custom_add_dashboard_widget');
 
-		// => The hooks for the capabilities is in the capabilities.php file
-		// Enable the capabilities
-		// add_action('admin_init', 'wp_donate_button_custom_add_capabilities');
-		register_activation_hook(__FILE__, 'wp_donate_button_custom_add_capabilities');
-		// Disable the capabilities
-		register_deactivation_hook(__FILE__, 'wp_donate_button_custom_remove_capabilities');
-
-		// => The hooks for the roles is in the roles.php file
-		// Enable the roles
-		register_activation_hook(__FILE__, 'wp_donate_button_custom_create_custom_role');
-		register_activation_hook(__FILE__, 'wp_donate_button_custom_update_administrator_capabilities');
-		// Disable the roles
-		register_deactivation_hook(__FILE__, 'wp_donate_button_custom_remove_custom_role');
+     
+     // === [ Désactivation du module ] ===
+     // Disable the capabilities
+     register_deactivation_hook(__FILE__, 'wp_donate_button_custom_remove_capabilities');
+     // Disable the roles
+     register_deactivation_hook(__FILE__, 'wp_donate_button_custom_remove_custom_role');
+     // Disable the initialisation
+     register_deactivation_hook(__FILE__, "wp_donate_button_custom_disable");
