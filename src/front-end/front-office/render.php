@@ -21,19 +21,189 @@
      */
     function wp_donate_button_custom_render_button() {
         if ((is_page() || is_front_page()) && !is_admin()) {
+
+
+            $wp_dbc_set_visibility = get_option('wp_dbc_set_visibility', 'true');
+            $wp_dbc_set_color = esc_attr(get_option('wp_dbc_set_color', '#0073aa'));
+            $wp_dbc_set_position = get_option('wp_dbc_set_position', 'bottom-right');
+            $wp_dbc_set_effect = get_option('wp_dbc_set_effect', 'hover_medium');
+            $wp_dbc_set_icone_type = get_option('wp_dbc_set_icone_type', 'icone_wp_dash');
+            $wp_dbc_set_icone_wp_dash = esc_attr(get_option('wp_dbc_set_icone_wp_dash', 'dashicons-heart'));
+            $wp_dbc_set_icone_wp_media = esc_attr(get_option('wp_dbc_set_icone_wp_media', ''));
+            $wp_dbc_set_texte = esc_html(get_option('wp_dbc_set_texte', 'Ceci est un bouton de don'));
+            $wp_dbc_set_options_number = get_option('wp_dbc_set_options_number', 2);
+            $wp_dbc_set_option_1_title = esc_html(get_option('wp_dbc_set_option_1_title', 'Option 1'));
+            $wp_dbc_set_option_1_link = esc_url(get_option('wp_dbc_set_option_1_link', 'https://example.com'));
+            $wp_dbc_set_option_2_title = esc_html(get_option('wp_dbc_set_option_2_title', 'Option 2'));
+            $wp_dbc_set_option_2_link = esc_url(get_option('wp_dbc_set_option_2_link', 'https://example.com'));
+            $wp_dbc_set_option_3_title = esc_html(get_option('wp_dbc_set_option_3_title', 'Option 3'));
+            $wp_dbc_set_option_3_link = esc_url(get_option('wp_dbc_set_option_3_link', 'https://example.com'));
+            $wp_dbc_set_option_4_title = esc_html(get_option('wp_dbc_set_option_4_title', 'Option 4'));
+            $wp_dbc_set_option_4_link = esc_url(get_option('wp_dbc_set_option_4_link', 'https://example.com'));
+
+            var_dump($wp_dbc_set_visibility, $wp_dbc_set_color, $wp_dbc_set_position, $wp_dbc_set_effect, $wp_dbc_set_icone_type, $wp_dbc_set_icone_wp_dash, $wp_dbc_set_icone_wp_media, $wp_dbc_set_texte, $wp_dbc_set_options_number, $wp_dbc_set_option_1_title, $wp_dbc_set_option_1_link, $wp_dbc_set_option_2_title, $wp_dbc_set_option_2_link, $wp_dbc_set_option_3_title, $wp_dbc_set_option_3_link, $wp_dbc_set_option_4_title, $wp_dbc_set_option_4_link);
+
+            // Position CSS selon l'option choisie
+            $wp_dbc_set_positions = [
+                'bottom-right' => 'bottom: 20px; right: 20px;',
+                'bottom-left' => 'bottom: 20px; left: 20px;',
+                'top-right' => 'top: 20px; right: 20px;',
+                'top-left' => 'top: 20px; left: 20px;',
+            ];
+            $wp_dbc_set_style = isset($wp_dbc_set_positions[$wp_dbc_set_position]) ? $wp_dbc_set_positions[$wp_dbc_set_position] : $wp_dbc_set_positions['bottom-right'];
+
+            echo "
+            <!-- Bouton de don -->
+            <div class='donate-button'>
+                <!-- Bouton principal -->
+                <div class='main-button'>
+                    <button>
+                        <span class='icon-container'>
+                            <img class='icon' alt='icon' src='https://www.la-spa.fr/app/app/uploads/2021/09/highlightFichier-2@2x.png'/>
+                            ".($wp_dbc_set_icone_wp_dash ? "<span class='dashicons $wp_dbc_set_icone_wp_dash' style='margin-right:8px; vertical-align:middle;'></span>" : "")."
+                        </span>
+                        <span class='donate-text'>$wp_dbc_set_texte</span>
+                    </button>
+                </div>
+                <!-- Boutons supplémentaires -->
+                <div class='additional-buttons'>
+                    ";
+                    // Afficher les boutons supplémentaires en fonction du nombre d'options
+                    if ($wp_dbc_set_options_number >= 1) {
+                        echo "<a href='$wp_dbc_set_option_1_link' target='_blank'>
+                            <button class='additional-button' id='button-one'>$wp_dbc_set_option_1_title</button>
+                        </a>";
+                    }
+                    if ($wp_dbc_set_options_number >= 2) {
+                        echo "<a href='$wp_dbc_set_option_2_link' target='_blank'>
+                            <button class='additional-button' id='button-one'>$wp_dbc_set_option_2_title</button>
+                        </a>";
+                    }
+                    if ($wp_dbc_set_options_number >= 3) {
+                        echo "<a href='$wp_dbc_set_option_3_link' target='_blank'>
+                            <button class='additional-button' id='button-one'>$wp_dbc_set_option_3_title</button>
+                        </a>";
+                    }
+                    if ($wp_dbc_set_options_number >= 4) {
+                        echo "<a href='$wp_dbc_set_option_4_link' target='_blank'>
+                            <button class='additional-button' id='button-one'>$wp_dbc_set_option_4_title</button>
+                        </a>";
+                    }
+                    echo "
+                </div>
+            </div>";
+            // Styles CSS
+            echo "
+            <style>
+                /* Bouton de don */
+                .donate-button, .donate-button .main-button button{
+                    font-weight: bold;
+                    font-size: 0.90em;
+                }
+
+                .donate-button, .donate-button .main-button button, .donate-button .additional-button{
+                    padding: 8px 8px;
+                }
+
+                .donate-button, .donate-button .main-button button, .donate-button .additional-button {
+                    color: white;
+                }
+
+                .donate-button {
+                    $wp_dbc_set_style /* Position CSS selon l'option choisie */
+                    background-color: $wp_dbc_set_color; /* Couleur de fond selon l'option choisie */
+                    box-shadow: 4px 4px 10px rgba(235, 90, 42, 0.45); /* Ombre du bouton */
+                }
+
+                .donate-button {
+                    position: fixed;
+                    z-index: 99999999; /* min z-index 888 pour WordPress */
+                    display: flex;
+                    gap: 10px;
+                    border: none;
+                    border-radius: 8px;
+                    backdrop-filter: blur(5px);
+                    cursor: pointer;
+                    transition: transform 0.10s ease;
+                }
+
+                /* Style principal du bouton de don */
+                .donate-button .main-button button {
+                    display: flex;
+                    gap: 10px;
+                    background-color: transparent;
+                    border: none;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                }
+
+                .donate-button .main-button .icon {
+                    width: 24px;
+                    height: 24px;
+                }
+
+                .donate-button .main-button .donate-text {
+                    white-space: nowrap;
+                }
+
+                /* Style pour les boutons supplémentaires */
+                .donate-button .additional-buttons {
+                    display: none;
+                    gap: 10px;
+                    top: 100%;
+                    left: 0;
+                    right: 0;
+                    opacity: 0;
+                    visibility: hidden;
+                    transition: opacity 0.3s ease, visibility 0.3s ease;
+                }
+
+                .donate-button:hover .additional-buttons {
+                    display: flex;
+                    opacity: 1;
+                    visibility: visible;
+                }
+
+                .donate-button .additional-button {
+                    background-color: transparent;
+                    font-weight: bold;
+                    font-size: 1.1em;
+                    padding: 10px 20px;
+                    border: 2px solid white;
+                    border-radius: 20px;
+                    text-align: center;
+                    cursor: pointer;
+                    transition: background-color 0.3s ease, transform 0.2s ease;
+                }
+
+                .donate-button .additional-button:hover {
+                    background-color: rgba(255, 255, 255, 0.2);
+                    transform: scale(1.05);
+                }
+
+                /* Tablette & mobile */
+                @media (max-width: 1024px){
+                    .donate-button{
+                        display: none;
+                    }
+                }
+            </style>";
+
+
             $couleur = esc_attr(get_option('wp_dbc_set_color', '#0073aa'));
             $position = get_option('wp_dbc_set_position', 'bottom-right');
             $icone = esc_attr(get_option('wp_dbc_set_icone_wp_dash', 'dashicons-heart'));
+            var_dump($icone);
             $texte = esc_html(get_option('wp_dbc_set_texte', 'Clique ici'));
 
             $lien = esc_url(get_option('wp_dbc_set_option_1_link', ''));
     
             // Position CSS selon l'option choisie
             $positions = [
-                'bottom-right' => 'bottom: 20px; right: 20px;',
-                'bottom-left' => 'bottom: 20px; left: 20px;',
-                'top-right' => 'top: 20px; right: 20px;',
-                'top-left' => 'top: 20px; left: 20px;',
+                'bottom-right' => 'bottom: 90px; right: 20px;',
+                'bottom-left' => 'bottom: 90px; left: 20px;',
+                'top-right' => 'top: 90px; right: 20px;',
+                'top-left' => 'top: 90px; left: 20px;',
             ];
             $style = isset($positions[$position]) ? $positions[$position] : $positions['bottom-right'];
     
@@ -57,12 +227,21 @@
                 .wp-donate-button-custom-bouton:hover {
                     transform: scale(1.1);
                 }
-            </style>
-            <a href=\"$lien\" class=\"wp-donate-button-custom-bouton\">
-                " . ($icone ? "<span class='dashicons $icone' style='margin-right:8px; vertical-align:middle;'></span>" : "") . "
-                $texte
-            </a>
-            ";
+            </style>";
+            if($icone!='none'){
+                echo "
+                <a href=\"$lien\" class=\"wp-donate-button-custom-bouton\">
+                    " . ($icone ? "<span class='dashicons $icone' style='margin-right:8px; vertical-align:middle;'></span>" : "") . "
+                    $texte
+                </a>
+                ";
+            } else {
+                echo "
+                <a href=\"$lien\" class=\"wp-donate-button-custom-bouton\">
+                    $texte
+                </a>
+                ";
+            }
         }
     }
     

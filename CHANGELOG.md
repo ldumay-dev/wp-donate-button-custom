@@ -4,6 +4,11 @@
 
 - 
 
+## [0.0.5] - Mise à jour de la base du module
+
+- Mise à jour du rendu du bouton de don dans le Front-office du Front-end.
+- Mise à jour de la page de configuration.
+
 ## [0.0.4] - Mise à jour de la base du module
 
 - Mise à jour du fichier de d'activation et de désactivation du module.

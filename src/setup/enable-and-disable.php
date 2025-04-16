@@ -28,6 +28,10 @@
      * - wp_dbc_set_option_3_link
      * - wp_dbc_set_option_4_title
      * - wp_dbc_set_option_4_link
+     * 
+     * Ces valeurs sont enregistrées dans la base de données de WordPress.
+     * Il est possible de la modifier via la page de réglages du plugin :
+     * -> wp-admin/options.php?action=reset&option_page=wp_dbc_options_group
      */
     
     /**

@@ -186,12 +186,13 @@
                     '' => 'Survol moyen',
                     'hover_slow' => 'Survol lent',
                 ];
-                echo "<select name='wp_dbc_set_effect'>";
+                echo "<select name='wp_dbc_set_effect' disabled>";
                 foreach ($options as $key => $label) {
                     $selected = selected($val, $key, false);
                     echo "<option value='$key' $selected>$label</option>";
                 }
                 echo "</select>";
+                echo "<p class='description'><i>Cette option est désactivée pour le moment.</i></p>";
             },
             'wp-donate-button-custom-apparence',
             'wp_dbc_section_apparence'
@@ -220,7 +221,7 @@
         // wp_dbc_set_icone_wp_dash
         add_settings_field(
             'wp_dbc_set_icone_wp_dash',
-            'Classe Dashicon',
+            'Icone Dashicon',
             function () {
                 $val = esc_attr(get_option('wp_dbc_set_icone_wp_dash', 'heart'));
                 $options = [
