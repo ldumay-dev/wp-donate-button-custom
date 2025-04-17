@@ -401,7 +401,10 @@
                 echo "<select name='wp_dbc_set_icone_wp_dash' $disabled>";
                 foreach ($options as $key => $label) {
                     $selected = selected($val, $key, false);
-                    echo "<option value='$key' $selected>$label</option>";
+                    echo "<option value='$key' $selected>
+                            <span class='dashicons $key'></span>
+                            $label
+                        </option>";
                 }
                 echo "</select>";
                 if($disabled == '') {
@@ -422,10 +425,14 @@
             function () {
                 $val = esc_attr(get_option('wp_dbc_set_icone_wp_media', ''));
                 $disabled = (get_option('wp_dbc_set_icone_type') == 'icone_wp_media') ? '' : 'disabled';
+                // affichage d'un champs permettant de récupérer l'URL d'un média de la bibliothèque WP
                 echo '<input type="text" name="wp_dbc_set_icone_wp_media" id="wp_dbc_set_icone_wp_media" value="'.$val.'" class="regular-text" 
-                    placeholder="URL de l\'icône" '.$disabled.' />';
+                    placeholder="URL de l\'icône" '.$disabled.' />
+                    <input type="button" class="button button-secondary" id="wp_dbc_set_icone_wp_media_button" value="Sélectionner une image" '.$disabled.' />
+                ';
                 if($disabled == '') {
-                    echo "<p class='description'>Téléchargez une image dans la bibliothèque de médias et copiez l'URL ici.</p>";
+                    echo "<p class='description'>Téléchargez une image dans la bibliothèque de médias et copiez l'URL ici.
+                    <br/>Vous pouvez aussi utiliser le bouton ci-dessus pour sélectionner une image dans la bibliothèque de médias.</p>";
                 } else if($disabled != '' && get_option('wp_dbc_set_icone_type') == 'icone_wp_dash') {
                     echo "<p class='description'><i style='color:orange;'>L'option d'icone Dashicon est sélectionnée, l'icône WP Media est désactivée.</i></p>";
                 } else {

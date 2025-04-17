@@ -60,8 +60,8 @@
      require_once WP_DBC_PATH.'src/front-end/back-office/shortcode.php';
      require_once WP_DBC_PATH.'src/front-end/back-office/widget.php';
      // => Assets
-     require_once WP_DBC_PATH.'src/assets/css/wp-donate-button-custom.css';
-     require_once WP_DBC_PATH.'src/assets/js/wp-donate-button-custom.js';
+     // require_once WP_DBC_PATH.'src/assets/css/wp-donate-button-custom.css';
+     // require_once WP_DBC_PATH.'src/assets/js/wp-donate-button-custom.js';
      // => Translation
      // require_once WP_DBC_PATH.'src/languages/wp-donate-button-custom.php';
 
@@ -90,13 +90,12 @@
 
      // === [ Démarrage du module ] ===
      // --- [ Front-end - Front-office ] ---
-     // Charger Dashicons
-     add_action('wp_enqueue_scripts', 'wp_donate_button_custom_enqueue_dashicons');
+     // Charger des scripts nécessaires sur le front-office du front-end
+     add_action('wp_enqueue_scripts', 'wp_donate_button_custom_enqueue_front_office');
+     // Charger des scripts nécessaires sur le back-office du front-end
+     add_action('admin_enqueue_scripts', 'wp_donate_button_custom_enqueue_back_office');
      // Afficher un bouton sur toutes les pages vitrines de WordPress
      add_action( 'wp_footer', 'wp_donate_button_custom_render_button' );
-     // Enqueue the CSS and JS files
-     add_action( 'wp_enqueue_scripts', 'wp_donate_button_custom_enqueue_styles' );
-     add_action( 'wp_enqueue_scripts', 'wp_donate_button_custom_enqueue_scripts' );
      // --- [ Front-end - Back-office ] ---
      // Enable the menu
      add_action('admin_menu', 'wp_donate_button_custom_admin_menu');

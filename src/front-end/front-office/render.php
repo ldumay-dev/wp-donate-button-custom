@@ -12,8 +12,32 @@
     /**
      * Enqueue Dashicons
      */
-    function wp_donate_button_custom_enqueue_dashicons() {
+    function wp_donate_button_custom_enqueue_front_office() {
+        // Charge the Dashicons CSS file
         wp_enqueue_style('dashicons');
+        
+        // Enqueue the button styles
+        wp_enqueue_style( 'wp-donate-button-custom-styles-front-office', WP_DBC_URL . 'src/assets/css/wp-donate-button-custom-front-office.css');
+        
+        // Enqueue the button scripts
+        wp_enqueue_script( 'wp-donate-button-custom-scripts-front-office', WP_DBC_URL . 'src/assets/js/wp-donate-button-custom-front-office.js', array( 'jquery' ), null, true );
+    }
+
+    /**
+     * Enqueue Dashicons
+     */
+    function wp_donate_button_custom_enqueue_back_office() {
+        // Charge the Dashicons CSS file
+        wp_enqueue_style('dashicons');
+
+        // Chargement du Media Uploader
+        wp_enqueue_media();
+        
+        // Enqueue the button styles
+        wp_enqueue_style( 'wp-donate-button-custom-styles-back-office', WP_DBC_URL . 'src/assets/css/wp-donate-button-custom-back-office.css');
+        
+        // Enqueue the button scripts
+        wp_enqueue_script( 'wp-donate-button-custom-scripts-back-office', WP_DBC_URL . 'src/assets/js/wp-donate-button-custom-back-office.js', array( 'jquery' ), null, true );
     }
 
     /**
@@ -255,20 +279,4 @@
                 </style>";
             }
         }
-    }
-    
-    /**
-     * Enqueue the button styles
-     */
-    function wp_donate_button_custom_enqueue_styles() {
-        // Enqueue the button styles
-        wp_enqueue_style( 'wp-donate-button-custom-styles', plugin_dir_url( __FILE__ ) . 'assets/css/wp-donate-button-custom.css');
-    }
-    
-    /**
-     * Enqueue the button scripts
-     */
-    function wp_donate_button_custom_enqueue_scripts() {
-        // Enqueue the button scripts
-        wp_enqueue_script( 'wp-donate-button-custom-scripts', plugin_dir_url( __FILE__ ) . 'assets/js/wp-donate-button-custom.js', array( 'jquery' ), null, true );
     }
