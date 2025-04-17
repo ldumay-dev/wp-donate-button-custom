@@ -121,9 +121,41 @@
                         echo "
                     </div>
                 </div>";
-                // Styles CSS
+                // Toutes les listes de polices utilisées dans le module
+                $fonts_family_Google = [
+                    // Police classique par ordre alphabétique
+                    'Arial, sans-serif' => 'Arial, sans-serif',
+                    'Courier New, monospace' => 'Courier New, monospace',
+                    'Georgia, serif' => 'Georgia, serif',
+                    'Times New Roman, serif' => 'Times New Roman, serif',
+                    'Verdana, sans-serif' => 'Verdana, sans-serif',
+                    // Police Google Font par ordre alphabétique
+                    'Abril Fatface, serif' => 'Abril+Fatface',
+                    'Bebas Neue, sans-serif' => 'Bebas+Neue',
+                    'Dancing Script, cursive' => 'Dancing+Script',
+                    'Lobster, sans-serif' => 'Lobster',
+                    'Montserrat, sans-serif' => 'Montserrat',
+                    'Open Sans, sans-serif' => 'Open+Sans',
+                    'Oswald, sans-serif' => 'Oswald',
+                    'Raleway, sans-serif' => 'Raleway',
+                    'Roboto, sans-serif' => 'Roboto',
+                    'Source Sans 3, sans-serif' => 'Source+Sans+3',
+                ];
+                $wp_dbc_set_font_family_API = '';
+                // Vérification de la police choisie
+                if (array_key_exists($wp_dbc_set_font_family, $fonts_family_Google)) {
+                    // Si la police est dans la liste, on l'utilise
+                    $wp_dbc_set_font_family_API = $fonts_family_Google[$wp_dbc_set_font_family];
+                }
                 echo "
                 <style>
+                    /* Importation de la police Google */
+                    ";
+                    if ($wp_dbc_set_font_family_API != '') {
+                        echo "@import url('https://fonts.googleapis.com/css2?family=$wp_dbc_set_font_family_API&display=swap');";
+                    }
+                    echo "
+
                     /* Bouton de don */
                     .donate-button button:hover {
                         opacity: 1;

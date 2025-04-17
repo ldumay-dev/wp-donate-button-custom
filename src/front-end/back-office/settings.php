@@ -88,15 +88,27 @@
                             <h4><u>→ Option 4</u></h4>
                             <?php do_settings_sections('wp-donate-button-custom-option-4'); ?>
                         </div>
+                        <h2>Réinitialiser les réglages</h2>
+                        <div class="wp-donate-button-custom-box">
+                            <p>Zone de réinitialisation des réglages du bouton de don. 
+                            <br/>Ces actions vont réinitialisés tous les réglages du bouton de don.
+                            <br/><i style="color:orange;">Cependant, ces options ne sont pas encore disponibles pour le moment.</i></p>
+                            <!-- Réinitialiser les réglages -->
+                            <p class="wp-donate-button-custom-submit">
+                                <a href="<?php echo esc_url(admin_url('options-general.php?page=wp-donate-button-custom&reset=true')); ?>">
+                                    <button type="button" class="button button-secondary" disabled>Réinitialiser les réglages</button>
+                                </a>
+                            </p>
+                            <br/>
+                            <!-- Vider les champs -->
+                            <p class="wp-donate-button-custom-submit">
+                                <input type="button" class="button button-secondary" onClick="wpMonBoutonVitrineTestClear()" value="<?php _e('Vider tous les champs', 'mon-plugin'); ?>" disabled/>
+                            </p>
+                        </div>
+                        <h2>Enregistrer les réglages</h2>
                         <p class="wp-donate-button-custom-submit">
                             <!-- Enregistrer les réglages -->
                             <?php submit_button(); ?>
-                            <!-- Réinitialiser les réglages -->
-                            <a href="<?php echo esc_url(admin_url('options-general.php?page=wp-donate-button-custom&reset=true')); ?>">
-                                <button type="button" class="button button-secondary">Réinitialiser les réglages</button>
-                            </a>
-                            <!-- Vider les champs -->
-                            <input type="button" class="button button-secondary" onClick="wpMonBoutonVitrineTestClear()" value="<?php _e('Vider tous les champs', 'mon-plugin'); ?>"/>
                             <!-- Annuler (retour arrière) -->
                             <input type="reset" class="button button-secondary" onClick="wpMonBoutonVitrineTestReset()" value="<?php _e('Annuler', 'mon-plugin'); ?>"/>
                         </p>
@@ -148,6 +160,7 @@
                 $val = esc_attr(get_option('wp_dbc_set_visibility', 'true'));
                 $checked = checked($val, 'true', false);
                 echo "<label><input type='checkbox' name='wp_dbc_set_visibility' value='true' $checked /> Afficher le bouton</label>";
+                echo "<p class='description'>Cochez cette case pour afficher le bouton de don.</p>";
             },
             'wp-donate-button-custom-apparence',
             'wp_dbc_section_apparence'
@@ -158,7 +171,33 @@
             'Police du bouton',
             function () {
                 $val = esc_attr(get_option('wp_dbc_set_font_family', 'Arial, sans-serif'));
-                echo "<input type='text' name='wp_dbc_set_font_family' value='$val' class='regular-text' />";
+                // Toutes les listes de polices utilisées dans le module
+                $options = [
+                    // Police classique par ordre alphabétique
+                    'Arial, sans-serif' => 'Police classique - Arial, sans-serif',
+                    'Courier New, monospace' => 'Police classique - Courier New, monospace',
+                    'Georgia, serif' => 'Police classique - Georgia, serif',
+                    'Times New Roman, serif' => 'Police classique - Times New Roman, serif',
+                    'Verdana, sans-serif' => 'Police classique - Verdana, sans-serif',
+                    // Police Google Font par ordre alphabétique
+                    'Abril Fatface, serif' => 'Police Google Font - Abril Fatface, serif',
+                    'Bebas Neue, sans-serif' => 'Police Google Font - Bebas Neue, sans-serif',
+                    'Dancing Script, cursive' => 'Police Google Font - Dancing Script, cursive',
+                    'Lobster, sans-serif' => 'Police Google Font - Lobster, sans-serif',
+                    'Montserrat, sans-serif' => 'Police Google Font - Montserrat, sans-serif',
+                    'Open Sans, sans-serif' => 'Police Google Font - Open Sans, sans-serif',
+                    'Oswald, sans-serif' => 'Police Google Font - Oswald, sans-serif',
+                    'Raleway, sans-serif' => 'Police Google Font - Raleway, sans-serif',
+                    'Roboto, sans-serif' => 'Police Google Font - Roboto, sans-serif',
+                    'Source Sans 3, sans-serif' => 'Police Google Font - Source Sans 3, sans-serif',
+                ];
+                echo "<select name='wp_dbc_set_font_family'>";
+                foreach ($options as $key => $label) {
+                    $selected = selected($val, $key, false);
+                    echo "<option value='$key' $selected>$label</option>";
+                }
+                echo "</select>";
+                echo "<p class='description'>Sélectionnez une police parmis cette liste de polices classiques et Google Font.</p>";
             },
             'wp-donate-button-custom-apparence',
             'wp_dbc_section_apparence'
@@ -180,6 +219,7 @@
                     echo "<option value='$key' $selected>$label</option>";
                 }
                 echo "</select>";
+                echo "<p class='description'>Sélectionnez le style de la police du bouton.</p>";
             },
             'wp-donate-button-custom-apparence',
             'wp_dbc_section_apparence'
@@ -203,6 +243,7 @@
                     echo "<option value='$key' $selected>$label</option>";
                 }
                 echo "</select>";
+                echo "<p class='description'>Sélectionnez l'épaisseur de la police du bouton.</p>";
             },
             'wp-donate-button-custom-apparence',
             'wp_dbc_section_apparence'
@@ -214,6 +255,7 @@
             function () {
                 $val = esc_attr(get_option('wp_dbc_set_font_size', '1.1em'));
                 echo "<input type='text' name='wp_dbc_set_font_size' value='$val' class='regular-text' placeholder='Ce champs lis du CSS, ex: 10px ou 1.1em' />";
+                echo "<p class='description'>Sélectionnez la taille de la police du bouton. Ce champs lis du CSS, ex: 10px ou 1.1em.</p>";
             },
             'wp-donate-button-custom-apparence',
             'wp_dbc_section_apparence'
@@ -225,6 +267,7 @@
             function () {
                 $val = esc_attr(get_option('wp_dbc_set_color_background', '#0073aa'));
                 echo "<input type='color' name='wp_dbc_set_color_background' value='$val' />";
+                echo "<p class='description'>Sélectionnez la couleur du bouton.</p>";
             },
             'wp-donate-button-custom-apparence',
             'wp_dbc_section_apparence'
@@ -236,6 +279,7 @@
             function () {
                 $val = esc_attr(get_option('wp_dbc_set_color_box_shadow_color', '#0073aa'));
                 echo "<input type='color' name='wp_dbc_set_color_box_shadow_color' value='$val' />";
+                echo "<p class='description'>Sélectionnez la couleur de l'ombre du bouton.</p>";
             },
             'wp-donate-button-custom-apparence',
             'wp_dbc_section_apparence'
@@ -282,6 +326,7 @@
                     echo "<option value='$key' $selected>$label</option>";
                 }
                 echo "</select>";
+                echo "<p class='description'>Sélectionnez la position du bouton.</p>";
             },
             'wp-donate-button-custom-apparence',
             'wp_dbc_section_apparence'
@@ -397,6 +442,7 @@
             function () {
                 $val = esc_attr(get_option('wp_dbc_set_texte', 'Soutenez nous !'));
                 echo "<input type='text' name='wp_dbc_set_texte' value='$val' class='regular-text' />";
+                echo "<p class='description'>Texte du bouton de don.</p>";
             },
             'wp-donate-button-custom-contenu',
             'wp_dbc_section_contenu'
@@ -417,6 +463,7 @@
                     echo "<option value='$option' $selected>$option</option>";
                 }
                 echo "</select>";
+                echo "<p class='description'>Sélectionnez le nombre de boutons d'actions à afficher.</p>";
             },
             'wp-donate-button-custom-options',
             'wp_dbc_section_options'
