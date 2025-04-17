@@ -7,7 +7,7 @@
       * Requires at least:    6.0
       * Requires PHP:         7.0
       * php version:          7.0
-      * Version:              1.0.0
+      * Version:              beta 0.0.9
       * Author:               @ldumay
       * Author URI:           https://ldumay.fr
       * License:              GPLv3
