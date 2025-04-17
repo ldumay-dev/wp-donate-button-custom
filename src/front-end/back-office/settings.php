@@ -40,11 +40,15 @@
                 <h1>Réglages de <?php echo WP_DBC_NAME; ?></h1>
 
                 <!-- Message de succès -->
-                <?php if (isset($_GET['settings-updated'])) { ?>
-                    <div class="notice notice-success is-dismissible">
-                        <p><?php _e('Les réglages ont été enregistrés.', 'mon-plugin'); ?></p>
-                    </div>
-                <?php } ?>
+                <?php 
+                    /* if (isset($_GET['settings-updated'])) {
+                        ?>
+                        <div class="notice notice-success is-dismissible">
+                            <p><?php _e('Les réglages ont été enregistrés.', 'mon-plugin'); ?></p>
+                        </div>
+                    <?php
+                    } */
+                ?>
 
                 <!-- Contenu de la page -->
                 <div class="wrap wp-donate-button-custom-container">
@@ -108,7 +112,14 @@
     function wp_donate_button_custom_page_admin_init(){
         // - section 1
         register_setting('wp_dbc_options_group', 'wp_dbc_set_visibility');
-        register_setting('wp_dbc_options_group', 'wp_dbc_set_color');
+        register_setting('wp_dbc_options_group', 'wp_dbc_set_font_family');
+        register_setting('wp_dbc_options_group', 'wp_dbc_set_font_style');
+        register_setting('wp_dbc_options_group', 'wp_dbc_set_font_weight');
+        register_setting('wp_dbc_options_group', 'wp_dbc_set_font_size');
+        register_setting('wp_dbc_options_group', 'wp_dbc_set_color_background');
+        register_setting('wp_dbc_options_group', 'wp_dbc_set_color_box_shadow_color');
+        register_setting('wp_dbc_options_group', 'wp_dbc_set_color_box_shadow_opacity');
+        register_setting('wp_dbc_options_group', 'wp_dbc_set_surposition');
         register_setting('wp_dbc_options_group', 'wp_dbc_set_position');
         register_setting('wp_dbc_options_group', 'wp_dbc_set_effect');
         // - section 2
@@ -141,13 +152,114 @@
             'wp-donate-button-custom-apparence',
             'wp_dbc_section_apparence'
         );
-        // color
+        // font family
         add_settings_field(
-            'wp_dbc_set_color',
+            'wp_dbc_set_font_family',
+            'Police du bouton',
+            function () {
+                $val = esc_attr(get_option('wp_dbc_set_font_family', 'Arial, sans-serif'));
+                echo "<input type='text' name='wp_dbc_set_font_family' value='$val' class='regular-text' />";
+            },
+            'wp-donate-button-custom-apparence',
+            'wp_dbc_section_apparence'
+        );
+        // font style
+        add_settings_field(
+            'wp_dbc_set_font_style',
+            'Style de la police du bouton',
+            function () {
+                $val = esc_attr(get_option('wp_dbc_set_font_style', 'normal'));
+                $options = [
+                    'normal' => 'Normal',
+                    'italic' => 'Italique',
+                    'oblique' => 'Oblique',
+                ];
+                echo "<select name='wp_dbc_set_font_style'>";
+                foreach ($options as $key => $label) {
+                    $selected = selected($val, $key, false);
+                    echo "<option value='$key' $selected>$label</option>";
+                }
+                echo "</select>";
+            },
+            'wp-donate-button-custom-apparence',
+            'wp_dbc_section_apparence'
+        );
+        // font weight
+        add_settings_field(
+            'wp_dbc_set_font_weight',
+            'Épaisseur de la police du bouton',
+            function () {
+                $val = esc_attr(get_option('wp_dbc_set_font_weight', 'bold'));
+                $options = [
+                    'lighter' => 'Plus léger',
+                    'light' => 'Léger',
+                    'normal' => 'Normal',
+                    'bold' => 'Gras',
+                    'bolder' => 'Plus gras',
+                ];
+                echo "<select name='wp_dbc_set_font_weight'>";
+                foreach ($options as $key => $label) {
+                    $selected = selected($val, $key, false);
+                    echo "<option value='$key' $selected>$label</option>";
+                }
+                echo "</select>";
+            },
+            'wp-donate-button-custom-apparence',
+            'wp_dbc_section_apparence'
+        );
+        // font size
+        add_settings_field(
+            'wp_dbc_set_font_size',
+            'Taille de la police du bouton',
+            function () {
+                $val = esc_attr(get_option('wp_dbc_set_font_size', '1.1em'));
+                echo "<input type='text' name='wp_dbc_set_font_size' value='$val' class='regular-text' placeholder='Ce champs lis du CSS, ex: 10px ou 1.1em' />";
+            },
+            'wp-donate-button-custom-apparence',
+            'wp_dbc_section_apparence'
+        );
+        // wp_dbc_set_color_background
+        add_settings_field(
+            'wp_dbc_set_color_background',
             'Couleur du bouton',
             function () {
-                $val = esc_attr(get_option('wp_dbc_set_color', '#0073aa'));
-                echo "<input type='color' name='wp_dbc_set_color' value='$val' />";
+                $val = esc_attr(get_option('wp_dbc_set_color_background', '#0073aa'));
+                echo "<input type='color' name='wp_dbc_set_color_background' value='$val' />";
+            },
+            'wp-donate-button-custom-apparence',
+            'wp_dbc_section_apparence'
+        );
+        // wp_dbc_set_color_box_shadow_color
+        add_settings_field(
+            'wp_dbc_set_color_box_shadow_color',
+            'Couleur de l\'ombre du bouton',
+            function () {
+                $val = esc_attr(get_option('wp_dbc_set_color_box_shadow_color', '#0073aa'));
+                echo "<input type='color' name='wp_dbc_set_color_box_shadow_color' value='$val' />";
+            },
+            'wp-donate-button-custom-apparence',
+            'wp_dbc_section_apparence'
+        );
+        // wp_dbc_set_color_box_shadow_opacity
+        add_settings_field(
+            'wp_dbc_set_color_box_shadow_opacity',
+            'Opacité de l\'ombre du bouton',
+            function () {
+                $val = esc_attr(get_option('wp_dbc_set_color_box_shadow_opacity', '0.5'));
+                echo "<input type='number' name='wp_dbc_set_color_box_shadow_opacity' value='$val' min='0' max='1' step='0.1' />";
+                echo "<p class='description'>Valeur entre 0 et 1, avec un pas de 0.1 .</p>";
+            },
+            'wp-donate-button-custom-apparence',
+            'wp_dbc_section_apparence'
+        );
+        // surposition
+        add_settings_field(
+            'wp_dbc_set_surposition',
+            'Surposition du bouton',
+            function () {
+                $val = esc_attr(get_option('wp_dbc_set_surposition', '100000000'));
+                echo "<input type='number' name='wp_dbc_set_surposition' style='width:130px;' value='$val' min='0' max='100000000' step='100' />";
+                echo "<p class='description'>Valeur entre 0 et 100 000 000, avec un pas de 100 .</p>";
             },
             'wp-donate-button-custom-apparence',
             'wp_dbc_section_apparence'
@@ -203,17 +315,23 @@
         // wp_dbc_set_icone_type - button radio beetween dashicon ou a wp media loaded
         add_settings_field(
             'wp_dbc_set_icone_type',
-            'Type d\'icône',
+            'Type d\'icône du bouton',
             function () {
                 $val = esc_attr(get_option('wp_dbc_set_icone_type', 'icone_wp_dash'));
                 $options = [
+                    'none' => 'Aucune',
                     'icone_wp_dash' => 'Icône Dashicon',
                     'icone_wp_media' => 'Icône WP Media',
                 ];
+                echo "<select name='wp_dbc_set_icone_type'>";
                 foreach ($options as $key => $label) {
-                    $checked = checked($val, $key, false);
-                    echo "<label><input type='radio' name='wp_dbc_set_icone_type' value='$key' $checked /> $label</label><br />";
+                    $selected = selected($val, $key, false);
+                    echo "<option value='$key' $selected>$label</option>";
                 }
+                echo "</select>";
+                // Bouton de mise en application qui permet de rafraîchir la page
+                echo "<input type=submit name='wp_dbc_set_icone_wp_dash_save' value='Appliquer le changement' class='button button-secondary' />
+                <p class='description'>Après sélection, le bouton de mise en application permet de rafraîchir la page pour voir le changement.</p>";
             },
             'wp-donate-button-custom-contenu',
             'wp_dbc_section_contenu'
@@ -221,7 +339,7 @@
         // wp_dbc_set_icone_wp_dash
         add_settings_field(
             'wp_dbc_set_icone_wp_dash',
-            'Icone Dashicon',
+            '→ Icone Dashicon',
             function () {
                 $val = esc_attr(get_option('wp_dbc_set_icone_wp_dash', 'heart'));
                 $options = [
@@ -234,13 +352,20 @@
                     'dashicons-heart' => 'dashicons-heart',
                     'dashicons-home' => 'dashicons-home',
                 ];
-                echo "<select name='wp_dbc_set_icone_wp_dash'>";
+                $disabled = (get_option('wp_dbc_set_icone_type') == 'icone_wp_dash') ? '' : 'disabled';
+                echo "<select name='wp_dbc_set_icone_wp_dash' $disabled>";
                 foreach ($options as $key => $label) {
                     $selected = selected($val, $key, false);
                     echo "<option value='$key' $selected>$label</option>";
                 }
                 echo "</select>";
-                echo "<p class='description'><a href='https://developer.wordpress.org/resource/dashicons/' target='_blank'>Voir les icônes disponibles</a></p>";
+                if($disabled == '') {
+                    echo "<p class='description'><a href='https://developer.wordpress.org/resource/dashicons/' target='_blank'>Voir les icônes disponibles</a></p>";
+                } else if($disabled != '' && get_option('wp_dbc_set_icone_type') == 'icone_wp_media') {
+                    echo "<p class='description'><i style='color:orange;'>L'option d'icone WP Media est sélectionnée, l'icône Dashicon est désactivée.</i></p>";
+                } else {
+                    echo "<p class='description'><i style='color:orange;'>Aucune option d'icone n'a été sélectionnée.</i></p>";
+                }
             },
             'wp-donate-button-custom-contenu',
             'wp_dbc_section_contenu'
@@ -248,11 +373,19 @@
         // wp_dbc_set_icone_wp_media
         add_settings_field(
             'wp_dbc_set_icone_wp_media',
-            'Icône WP Media',
+            '→ Icône WP Media',
             function () {
                 $val = esc_attr(get_option('wp_dbc_set_icone_wp_media', ''));
-                echo '<input type="text" name="wp_dbc_set_icone_wp_media" id="wp_dbc_set_icone_wp_media" value="'.$val.'" class="regular-text" placeholder="URL de l\'icône" />';
-                echo "<p class='description'>Téléchargez une image dans la bibliothèque de médias et copiez l'URL ici.</p>";
+                $disabled = (get_option('wp_dbc_set_icone_type') == 'icone_wp_media') ? '' : 'disabled';
+                echo '<input type="text" name="wp_dbc_set_icone_wp_media" id="wp_dbc_set_icone_wp_media" value="'.$val.'" class="regular-text" 
+                    placeholder="URL de l\'icône" '.$disabled.' />';
+                if($disabled == '') {
+                    echo "<p class='description'>Téléchargez une image dans la bibliothèque de médias et copiez l'URL ici.</p>";
+                } else if($disabled != '' && get_option('wp_dbc_set_icone_type') == 'icone_wp_dash') {
+                    echo "<p class='description'><i style='color:orange;'>L'option d'icone Dashicon est sélectionnée, l'icône WP Media est désactivée.</i></p>";
+                } else {
+                    echo "<p class='description'><i style='color:orange;'>Aucune option d'icone n'a été sélectionnée.</i></p>";
+                }
             },
             'wp-donate-button-custom-contenu',
             'wp_dbc_section_contenu'

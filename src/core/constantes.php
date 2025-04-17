@@ -89,3 +89,21 @@
             return false;
         }
     }
+
+    /**
+     * Convertion of color from hex to rgba
+     */
+    function wp_donate_button_custom_hex2rgba($hex, $opacity = 1) {
+        $hex = str_replace('#', '', $hex);
+        if (strlen($hex) == 6) {
+            list($r, $g, $b) = array($hex[0].$hex[1], $hex[2].$hex[3], $hex[4].$hex[5]);
+        } elseif (strlen($hex) == 3) {
+            list($r, $g, $b) = array($hex[0].$hex[0], $hex[1].$hex[1], $hex[2].$hex[2]);
+        } else {
+            return false;
+        }
+        $r = hexdec($r);
+        $g = hexdec($g);
+        $b = hexdec($b);
+        return 'rgba('.$r.', '.$g.', '.$b.', '.$opacity.')';
+    }

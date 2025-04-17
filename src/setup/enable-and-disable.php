@@ -12,7 +12,14 @@
     /**
      * Réglages enregistrés de la page dans la base de données :
      * - wp_dbc_set_visibility
-     * - wp_dbc_set_color
+     * - wp_dbc_set_font_family
+     * - wp_dbc_set_font_style
+     * - wp_dbc_set_font_weight
+     * - wp_dbc_set_font_size
+     * - wp_dbc_set_color_background
+     * - wp_dbc_set_color_box_shadow_color
+     * - wp_dbc_set_color_box_shadow_opacity
+     * - wp_dbc_set_surposition
      * - wp_dbc_set_position
      * - wp_dbc_set_effect
      * - wp_dbc_set_icone_type
@@ -41,12 +48,19 @@
      */
     function wp_donate_button_custom_enable(){
         add_option('wp_dbc_set_visibility', 'true');
-        add_option('wp_dbc_set_color', '#0073aa');
+        add_option('wp_dbc_set_font_family', 'Arial, sans-serif');
+        add_option('wp_dbc_set_font_style', 'normal');
+        add_option('wp_dbc_set_font_weight', 'bold');
+        add_option('wp_dbc_set_font_size', '1.1em');
+        add_option('wp_dbc_set_color_background', '#0073aa');
+        add_option('wp_dbc_set_color_box_shadow_color', '#0073aa');
+        add_option('wp_dbc_set_color_box_shadow_opacity', '0.5');
+        add_option('wp_dbc_set_surposition', '100000000');
         add_option('wp_dbc_set_position', 'bottom-right');
         add_option('wp_dbc_set_effect', 'hover_medium');
         add_option('wp_dbc_set_icone_type', 'icone_wp_dash');
         add_option('wp_dbc_set_icone_wp_dash', 'dashicons-heart');
-        add_option('wp_dbc_set_icone_wp_media', '');
+        add_option('wp_dbc_set_icone_wp_media', 'https://www.la-spa.fr/app/app/uploads/2021/09/highlightFichier-2@2x.png');
         add_option('wp_dbc_set_texte', 'Ceci est un bouton de don');
         add_option('wp_dbc_set_options_number', 2);
         add_option('wp_dbc_set_option_1_title', 'Option 1');
@@ -64,7 +78,14 @@
      */
     function wp_donate_button_custom_disable(){
         delete_option('wp_dbc_set_visibility');
-        delete_option('wp_dbc_set_color');
+        delete_option('wp_dbc_set_font_family');
+        delete_option('wp_dbc_set_font_style');
+        delete_option('wp_dbc_set_font_weight');
+        delete_option('wp_dbc_set_font_size');
+        delete_option('wp_dbc_set_color_background');
+        delete_option('wp_dbc_set_color_box_shadow_color');
+        delete_option('wp_dbc_set_color_box_shadow_opacity');
+        delete_option('wp_dbc_set_surposition');
         delete_option('wp_dbc_set_position');
         delete_option('wp_dbc_set_effect');
         delete_option('wp_dbc_set_icone_type');
