@@ -2,6 +2,11 @@
 
 ## [1.0.X] - Mise à jour
 
+## [0.0.9] - Mise à jour de la base du module
+
+- Mise à jour du rendu du bouton de don dans le Front-office du Front-end.
+- Mise à jour de la page de configuration.
+
 ## [0.0.8] - Mise à jour de la base du module
 
 - Mise à jour du rendu du bouton de don dans le Front-office du Front-end.

@@ -128,6 +128,7 @@
         register_setting('wp_dbc_options_group', 'wp_dbc_set_font_style');
         register_setting('wp_dbc_options_group', 'wp_dbc_set_font_weight');
         register_setting('wp_dbc_options_group', 'wp_dbc_set_font_size');
+        register_setting('wp_dbc_options_group', 'wp_dbc_set_color_border_radius');
         register_setting('wp_dbc_options_group', 'wp_dbc_set_color_background');
         register_setting('wp_dbc_options_group', 'wp_dbc_set_color_box_shadow_color');
         register_setting('wp_dbc_options_group', 'wp_dbc_set_color_box_shadow_opacity');
@@ -256,6 +257,18 @@
                 $val = esc_attr(get_option('wp_dbc_set_font_size', '1.1em'));
                 echo "<input type='text' name='wp_dbc_set_font_size' value='$val' class='regular-text' placeholder='Ce champs lis du CSS, ex: 10px ou 1.1em' />";
                 echo "<p class='description'>Sélectionnez la taille de la police du bouton. Ce champs lis du CSS, ex: 10px ou 1.1em.</p>";
+            },
+            'wp-donate-button-custom-apparence',
+            'wp_dbc_section_apparence'
+        );
+        // wp_dbc_set_color_border_radius
+        add_settings_field(
+            'wp_dbc_set_color_border_radius',
+            'Rayon de bordure du bouton',
+            function () {
+                $val = esc_attr(get_option('wp_dbc_set_color_border_radius', '8px'));
+                echo "<input type='text' name='wp_dbc_set_color_border_radius' value='$val' class='regular-text' placeholder='Ce champs lis du CSS, ex: 10px ou 1.1em' />";
+                echo "<p class='description'>Sélectionnez le rayon de bordure du bouton. Ce champs lis du CSS, ex: 10px ou 1.1em.</p>";
             },
             'wp-donate-button-custom-apparence',
             'wp_dbc_section_apparence'

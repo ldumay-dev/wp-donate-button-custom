@@ -17,6 +17,7 @@
      * - wp_dbc_set_font_weight
      * - wp_dbc_set_font_size
      * - wp_dbc_set_color_background
+     * - wp_dbc_set_color_border_radius
      * - wp_dbc_set_color_box_shadow_color
      * - wp_dbc_set_color_box_shadow_opacity
      * - wp_dbc_set_surposition
@@ -52,6 +53,7 @@
         add_option('wp_dbc_set_font_style', 'normal');
         add_option('wp_dbc_set_font_weight', 'bold');
         add_option('wp_dbc_set_font_size', '1.1em');
+        add_option('wp_dbc_set_color_border_radius', '8px');
         add_option('wp_dbc_set_color_background', '#0073aa');
         add_option('wp_dbc_set_color_box_shadow_color', '#0073aa');
         add_option('wp_dbc_set_color_box_shadow_opacity', '0.5');
@@ -64,13 +66,13 @@
         add_option('wp_dbc_set_texte', 'Ceci est un bouton de don');
         add_option('wp_dbc_set_options_number', 2);
         add_option('wp_dbc_set_option_1_title', 'Option 1');
-        add_option('wp_dbc_set_option_1_link', 'https://example.com');
+        add_option('wp_dbc_set_option_1_link', 'https://example.com/option-1');
         add_option('wp_dbc_set_option_2_title', 'Option 2');
-        add_option('wp_dbc_set_option_2_link', 'https://example.com');
+        add_option('wp_dbc_set_option_2_link', 'https://example.com/option-2');
         add_option('wp_dbc_set_option_3_title', 'Option 3');
-        add_option('wp_dbc_set_option_3_link', 'https://example.com');
+        add_option('wp_dbc_set_option_3_link', 'https://example.com/option-3');
         add_option('wp_dbc_set_option_4_title', 'Option 4');
-        add_option('wp_dbc_set_option_4_link', 'https://example.com');
+        add_option('wp_dbc_set_option_4_link', 'https://example.com/option-4');
     }
 
     /**
@@ -82,6 +84,7 @@
         delete_option('wp_dbc_set_font_style');
         delete_option('wp_dbc_set_font_weight');
         delete_option('wp_dbc_set_font_size');
+        delete_option('wp_dbc_set_color_border_radius');
         delete_option('wp_dbc_set_color_background');
         delete_option('wp_dbc_set_color_box_shadow_color');
         delete_option('wp_dbc_set_color_box_shadow_opacity');

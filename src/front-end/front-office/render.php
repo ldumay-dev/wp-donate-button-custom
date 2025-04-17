@@ -46,7 +46,6 @@
     function wp_donate_button_custom_render_button() {
         if ((is_page() || is_front_page()) && !is_admin()) {
 
-
             $wp_dbc_set_visibility = get_option('wp_dbc_set_visibility', 'true');
             $wp_dbc_set_font_family = get_option('wp_dbc_set_font_family', 'Arial, sans-serif');
             $wp_dbc_set_font_style = get_option('wp_dbc_set_font_style', 'normal');
@@ -54,6 +53,7 @@
             $wp_dbc_set_font_size = get_option('wp_dbc_set_font_size', '1.1em');
             $wp_dbc_set_color_background = esc_attr(get_option('wp_dbc_set_color_background', '#0073aa'));
             $wp_dbc_set_color_box_shadow_color = esc_attr(get_option('wp_dbc_set_color_box_shadow_color', '#0073aa'));
+            $wp_dbc_set_color_border_radius = esc_attr(get_option('wp_dbc_set_color_border_radius', '8px'));
             $wp_dbc_set_color_box_shadow_opacity = esc_attr(get_option('wp_dbc_set_color_box_shadow_opacity', '0.5'));
             $wp_dbc_set_color_box_shadow = wp_donate_button_custom_hex2rgba($wp_dbc_set_color_box_shadow_color, $wp_dbc_set_color_box_shadow_opacity);
             $wp_dbc_set_surposition = get_option('wp_dbc_set_surposition', '100000000');
@@ -65,13 +65,13 @@
             $wp_dbc_set_texte = esc_html(get_option('wp_dbc_set_texte', 'Ceci est un bouton de don'));
             $wp_dbc_set_options_number = get_option('wp_dbc_set_options_number', 2);
             $wp_dbc_set_option_1_title = esc_html(get_option('wp_dbc_set_option_1_title', 'Option 1'));
-            $wp_dbc_set_option_1_link = esc_url(get_option('wp_dbc_set_option_1_link', 'https://example.com'));
+            $wp_dbc_set_option_1_link = esc_url(get_option('wp_dbc_set_option_1_link', 'https://example.com/option-1'));
             $wp_dbc_set_option_2_title = esc_html(get_option('wp_dbc_set_option_2_title', 'Option 2'));
-            $wp_dbc_set_option_2_link = esc_url(get_option('wp_dbc_set_option_2_link', 'https://example.com'));
+            $wp_dbc_set_option_2_link = esc_url(get_option('wp_dbc_set_option_2_link', 'https://example.com/option-2'));
             $wp_dbc_set_option_3_title = esc_html(get_option('wp_dbc_set_option_3_title', 'Option 3'));
-            $wp_dbc_set_option_3_link = esc_url(get_option('wp_dbc_set_option_3_link', 'https://example.com'));
+            $wp_dbc_set_option_3_link = esc_url(get_option('wp_dbc_set_option_3_link', 'https://example.com/option-3'));
             $wp_dbc_set_option_4_title = esc_html(get_option('wp_dbc_set_option_4_title', 'Option 4'));
-            $wp_dbc_set_option_4_link = esc_url(get_option('wp_dbc_set_option_4_link', 'https://example.com'));
+            $wp_dbc_set_option_4_link = esc_url(get_option('wp_dbc_set_option_4_link', 'https://example.com/option-4'));
 
             // var_dump($wp_dbc_set_visibility, 
             //     $wp_dbc_set_font_family, $wp_dbc_set_font_style, $wp_dbc_set_font_weight, $wp_dbc_set_font_size,
@@ -212,7 +212,7 @@
                         display: flex;
                         gap: 10px;
                         border: none;
-                        border-radius: 8px;
+                        border-radius: $wp_dbc_set_color_border_radius; /* Bordure selon l'option choisie */
                         backdrop-filter: blur(5px);
                         cursor: pointer;
                         transition: transform 0.10s ease;
@@ -259,7 +259,7 @@
                         background-color: transparent;
                         padding: 10px 20px;
                         border: 2px solid white;
-                        border-radius: 20px;
+                        border-radius: $wp_dbc_set_color_border_radius; /* Bordure selon l'option choisie */
                         text-align: center;
                         cursor: pointer;
                         transition: background-color 0.3s ease, transform 0.2s ease;
