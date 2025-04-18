@@ -2,6 +2,14 @@
 
 ## [Final - 1.0.X] - Mise à jour
 
+## [beta - 0.0.10] - Mise à jour de la base du module
+
+- Ajout d'un système de suivi de mise à jour du module via [Composer](https://getcomposer.org/) :
+    - Ajout du module Plugin Update Checker de [YahnisElsts](https://github.com/YahnisElsts/plugin-update-checker/).
+- Mise à jour du fichier .gitignore.
+- Mise à jour des fichier de constantes.
+- Mise à jour du fichier de d'activation et de désactivation du module.
+
 ## [beta - 0.0.9] - Mise à jour de la base du module
 
 - Mise à jour du rendu du bouton de don dans le Front-office du Front-end.

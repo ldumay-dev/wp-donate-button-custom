@@ -7,7 +7,7 @@
       * Requires at least:    6.0
       * Requires PHP:         7.0
       * php version:          7.0
-      * Version:              beta 0.0.9
+      * Version:              beta 0.0.10
       * Author:               @ldumay
       * Author URI:           https://ldumay.fr
       * License:              GPLv3
@@ -24,21 +24,41 @@
      define('WP_DBC_PATH', plugin_dir_path(__FILE__));
      define('WP_DBC_URL', plugin_dir_url(__FILE__));
      // - - - [ Constants and global variables ] - - -
-	// set global variable for current user.
-	global $current_logged_in_wp_user;
-	// Include the constantes file to set the constants
+     // --- WordPress globals - User
+     // set global variable for current user.
+     global $current_logged_in_wp_user;
+     // --- WordPress constants files
      require_once WP_DBC_PATH.'src/core/constantes.php';
-     $state_constantes = wp_donate_button_custom_set_constantes(
+     // --- WordPress constants elements
+     // Include the composer autoload file to load the classes
+     wp_donate_button_custom_set_constantes(
           '1.0.0', // Plugin version
           'WP Donate Button Custom', // Plugin name
           'WP DBC', // Plugin name lite
           WP_DBC_PATH, // Plugin directory path
           WP_DBC_URL, // Plugin directory url
      );
+     // --- Composer autoload
+     wp_donate_button_custom_autoload(WP_DBC_PATH);
+     // --- Composers - load the update checker
+     $github_repo = 'https://github.com/ldumay-dev/wp-donate-button-custom';
+     $github_branch = 'releases';
+     $github_token = '';
+     wp_donate_button_custom_update_checker(
+          WP_DBC_PATH, // The plugin directory path
+          WP_DBC_NAME_SLUG, // The plugin slug
+          $github_repo, // The GitHub repository name
+          $github_branch, // The branch that contains the plugin code
+          $github_token // The GitHub token
+     );
+
+     // - - - [ WordPress functions ] - - -
      // Check if the function is not already defined
      if ( ! function_exists( 'is_plugin_active' ) ) {
           include_once( ABSPATH.'wp-admin/includes/plugin.php' );
      }
+
+     // - - - [ Imports ] - - -
      // => Core
      require_once WP_DBC_PATH.'src/core/classes/wp-donate-button-custom.php';
      require_once WP_DBC_PATH.'src/core/functions/wp-donate-button-custom.php';

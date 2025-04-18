@@ -9,6 +9,9 @@
 		exit;
 	}
 
+    // Composer import
+    use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
+
     /**
      * Set the constants of the plugin
      * 
@@ -87,6 +90,45 @@
             return true;
         } else {
             return false;
+        }
+    }
+
+    /**
+     * Composer autoload
+     * @param string $path // Path to the plugin directory
+     */
+    function wp_donate_button_custom_autoload($path) {
+        if (file_exists($path . '/vendor/autoload.php')) {
+            require_once $path . '/vendor/autoload.php';
+        } else {
+            // If the autoload file is not found, display an error message
+            add_action('admin_notices', function() {
+                echo '<div class="error"><p>WP Donate Button Custom: Composer autoload file not found.</p></div>';
+            });
+        }
+    }
+
+    /**
+     * Update checker
+     * @param string $plugin_dir_path // Path to the plugin directory
+     * @param string $plugin_slug // Slug of the plugin
+     * @param string $github_repo // GitHub repository URL
+     * @param string $github_branch // Branch to check for updates
+     */
+    function wp_donate_button_custom_update_checker($plugin_dir_path, $plugin_slug, $github_repo, $github_branch, $github_token) {
+        // Create an instance of the update checker
+        $updateChecker = PucFactory::buildUpdateChecker(
+            $github_repo, /* GitHub repository URL */
+            $plugin_dir_path . '/wp-donate-button-custom.php', /* Path to the main plugin file */
+            $plugin_slug /* Unique identifier for the plugin */
+        );
+        // Set the branch that contains the stable release for updates
+        $updateChecker->setBranch($github_branch);
+        // Optional: If you're using a private repository, specify the access token like this:
+	    if( !empty($github_token) && $github_token != 'null' ) {
+            // Set the access token for authentication
+            // This is required for private repositories or if you want to avoid rate limits.
+            $updateChecker->setAuthentication($github_token);
         }
     }
 
