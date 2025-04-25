@@ -58,6 +58,8 @@
             $wp_dbc_set_color_box_shadow = wp_donate_button_custom_hex2rgba($wp_dbc_set_color_box_shadow_color, $wp_dbc_set_color_box_shadow_opacity);
             $wp_dbc_set_surposition = get_option('wp_dbc_set_surposition', '100000000');
             $wp_dbc_set_position = get_option('wp_dbc_set_position', 'bottom-right');
+            $wp_dbc_set_position_horizontal = get_option('wp_dbc_set_position_horizontal', '20px');
+            $wp_dbc_set_position_vertical = get_option('wp_dbc_set_position_vertical', '20px');
             $wp_dbc_set_effect = get_option('wp_dbc_set_effect', 'hover_medium');
             $wp_dbc_set_icone_type = get_option('wp_dbc_set_icone_type', 'icone_wp_dash');
             $wp_dbc_set_icone_wp_dash = esc_attr(get_option('wp_dbc_set_icone_wp_dash', 'dashicons-heart'));
@@ -85,10 +87,10 @@
 
             // Position CSS selon l'option choisie
             $wp_dbc_set_positions = [
-                'bottom-right' => 'bottom: 20px; right: 20px;',
-                'bottom-left' => 'bottom: 20px; left: 20px;',
-                'top-right' => 'top: 20px; right: 20px;',
-                'top-left' => 'top: 20px; left: 20px;',
+                'bottom-right' => 'bottom: '.$wp_dbc_set_position_vertical.'; right: '.$wp_dbc_set_position_horizontal.';',
+                'bottom-left' => 'bottom: '.$wp_dbc_set_position_vertical.'; left: '.$wp_dbc_set_position_horizontal.';',
+                'top-right' => 'top: '.$wp_dbc_set_position_vertical.'; right: '.$wp_dbc_set_position_horizontal.';',
+                'top-left' => 'top: '.$wp_dbc_set_position_vertical.'; left: '.$wp_dbc_set_position_horizontal.';',
             ];
             $wp_dbc_set_style = isset($wp_dbc_set_positions[$wp_dbc_set_position]) ? $wp_dbc_set_positions[$wp_dbc_set_position] : $wp_dbc_set_positions['bottom-right'];
 
@@ -122,22 +124,22 @@
                     <div class='additional-buttons'>
                         ";
                         // Afficher les boutons supplémentaires en fonction du nombre d'options
-                        if ($wp_dbc_set_options_number >= 1) {
+                        if ($wp_dbc_set_options_number >= 1 && ($wp_dbc_set_option_1_link != '' || $wp_dbc_set_option_1_title != '')) {
                             echo "<a href='$wp_dbc_set_option_1_link' target='_blank'>
                                 <button class='additional-button' id='button-one'>$wp_dbc_set_option_1_title</button>
                             </a>";
                         }
-                        if ($wp_dbc_set_options_number >= 2) {
+                        if ($wp_dbc_set_options_number >= 2 && ($wp_dbc_set_option_2_title != '' || $wp_dbc_set_option_2_link != '')) {
                             echo "<a href='$wp_dbc_set_option_2_link' target='_blank'>
                                 <button class='additional-button' id='button-one'>$wp_dbc_set_option_2_title</button>
                             </a>";
                         }
-                        if ($wp_dbc_set_options_number >= 3) {
+                        if ($wp_dbc_set_options_number >= 3 && ($wp_dbc_set_option_3_title != '' || $wp_dbc_set_option_3_link != '')) {
                             echo "<a href='$wp_dbc_set_option_3_link' target='_blank'>
                                 <button class='additional-button' id='button-one'>$wp_dbc_set_option_3_title</button>
                             </a>";
                         }
-                        if ($wp_dbc_set_options_number >= 4) {
+                        if ($wp_dbc_set_options_number >= 4 && ($wp_dbc_set_option_4_title != '' || $wp_dbc_set_option_4_link != '')) {
                             echo "<a href='$wp_dbc_set_option_4_link' target='_blank'>
                                 <button class='additional-button' id='button-one'>$wp_dbc_set_option_4_title</button>
                             </a>";

@@ -66,6 +66,8 @@
         /**
          * Add a submenu to the info page
          */
+        // Désactivé pour le moment <=== TODO
+        /*
         add_submenu_page(
             $slug_main, // Parent slug
             'À propos de '.WP_DBC_NAME, // Page Title
@@ -74,10 +76,13 @@
             WP_DBC_NAME_SLUG.'-info', // Slug of the submenu
             WP_DBC_NAME_SLUG_UNDERSCORE.'_page_info' // Callback function to display the info page
         );
+        */
 
         /**
          * Add a submenu to the info page
          */
+        // Désactivé pour le moment <=== TODO
+        /*
         add_submenu_page(
             $slug_main, // Parent slug
             'Dev. Infos. - '.WP_DBC_NAME, // Page Title
@@ -86,6 +91,7 @@
             WP_DBC_NAME_SLUG.'-dev', // Slug of the submenu
             WP_DBC_NAME_SLUG_UNDERSCORE.'_page_dev' // Callback function to display the info page
         );
+        */
     }
 
     /**

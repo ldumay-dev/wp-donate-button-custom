@@ -134,6 +134,8 @@
         register_setting('wp_dbc_options_group', 'wp_dbc_set_color_box_shadow_opacity');
         register_setting('wp_dbc_options_group', 'wp_dbc_set_surposition');
         register_setting('wp_dbc_options_group', 'wp_dbc_set_position');
+        register_setting('wp_dbc_options_group', 'wp_dbc_set_position_horizontal');
+        register_setting('wp_dbc_options_group', 'wp_dbc_set_position_vertical');
         register_setting('wp_dbc_options_group', 'wp_dbc_set_effect');
         // - section 2
         register_setting('wp_dbc_options_group', 'wp_dbc_set_icone_type');
@@ -161,7 +163,8 @@
                 $val = esc_attr(get_option('wp_dbc_set_visibility', 'true'));
                 $checked = checked($val, 'true', false);
                 echo "<label><input type='checkbox' name='wp_dbc_set_visibility' value='true' $checked /> Afficher le bouton</label>";
-                echo "<p class='description'>Cochez cette case pour afficher le bouton de don.</p>";
+                echo "<p class='description'>Cochez cette case pour afficher ou masquer le bouton de don. 
+                    <br/>Par défaut, le bouton de don est visible sur toutes les pages vitrines.</p>";
             },
             'wp-donate-button-custom-apparence',
             'wp_dbc_section_apparence'
@@ -198,7 +201,8 @@
                     echo "<option value='$key' $selected>$label</option>";
                 }
                 echo "</select>";
-                echo "<p class='description'>Sélectionnez une police parmis cette liste de polices classiques et Google Font.</p>";
+                echo "<p class='description'>Sélectionnez une police parmis cette liste de polices.
+                    <br/>Cette liste dispose de polices classiques et de polices Google Font.</p>";
             },
             'wp-donate-button-custom-apparence',
             'wp_dbc_section_apparence'
@@ -220,7 +224,8 @@
                     echo "<option value='$key' $selected>$label</option>";
                 }
                 echo "</select>";
-                echo "<p class='description'>Sélectionnez le style de la police du bouton.</p>";
+                echo "<p class='description'>Sélectionnez le style de la police du bouton.
+                    <br/>Vous pourvez choisir entre normal, italique ou oblique.</p>";
             },
             'wp-donate-button-custom-apparence',
             'wp_dbc_section_apparence'
@@ -244,7 +249,8 @@
                     echo "<option value='$key' $selected>$label</option>";
                 }
                 echo "</select>";
-                echo "<p class='description'>Sélectionnez l'épaisseur de la police du bouton.</p>";
+                echo "<p class='description'>Sélectionnez l'épaisseur de la police du bouton.
+                    <br/>Vous pourvez choisir entre plus léger, léger, normal, gras ou plus gras.</p>";
             },
             'wp-donate-button-custom-apparence',
             'wp_dbc_section_apparence'
@@ -254,9 +260,12 @@
             'wp_dbc_set_font_size',
             'Taille de la police du bouton',
             function () {
+                $placeholder = 'Personnalisez la taille de la police du bouton, ex: 10px ou 1.1em';
                 $val = esc_attr(get_option('wp_dbc_set_font_size', '1.1em'));
-                echo "<input type='text' name='wp_dbc_set_font_size' value='$val' class='regular-text' placeholder='Ce champs lis du CSS, ex: 10px ou 1.1em' />";
-                echo "<p class='description'>Sélectionnez la taille de la police du bouton. Ce champs lis du CSS, ex: 10px ou 1.1em.</p>";
+                echo "<input type='text' name='wp_dbc_set_font_size' value='$val' class='regular-text' placeholder='$placeholder' />";
+                echo "<p class='description'>Personnalisez la taille de la police du bouton de don.
+                    <br/>Vous pouvez utiliser des unités CSS telles que px, em, rem, etc.
+                    <br/>Exemples : 10px, 1.1em, 1.5rem, etc.</p>";
             },
             'wp-donate-button-custom-apparence',
             'wp_dbc_section_apparence'
@@ -266,9 +275,12 @@
             'wp_dbc_set_color_border_radius',
             'Rayon de bordure du bouton',
             function () {
+                $placeholder = 'Personnalisez le rayon de bordure du bouton, ex: 10px ou 1.1em';
                 $val = esc_attr(get_option('wp_dbc_set_color_border_radius', '8px'));
-                echo "<input type='text' name='wp_dbc_set_color_border_radius' value='$val' class='regular-text' placeholder='Ce champs lis du CSS, ex: 10px ou 1.1em' />";
-                echo "<p class='description'>Sélectionnez le rayon de bordure du bouton. Ce champs lis du CSS, ex: 10px ou 1.1em.</p>";
+                echo "<input type='text' name='wp_dbc_set_color_border_radius' value='$val' class='regular-text' placeholder='$placeholder' />";
+                echo "<p class='description'>Personnalisez le rayon de bordure du bouton de don.
+                    <br/>Vous pouvez utiliser des unités CSS telles que px, em, rem, etc.
+                    <br/>Exemples : 10px, 1.1em, 1.5rem, etc.</p>";
             },
             'wp-donate-button-custom-apparence',
             'wp_dbc_section_apparence'
@@ -280,7 +292,8 @@
             function () {
                 $val = esc_attr(get_option('wp_dbc_set_color_background', '#0073aa'));
                 echo "<input type='color' name='wp_dbc_set_color_background' value='$val' />";
-                echo "<p class='description'>Sélectionnez la couleur du bouton.</p>";
+                echo "<p class='description'>Personalisez la couleur de fond du bouton de don.
+                    <br/>Sélectionnez une couleur parmi la palette de couleurs.</p>";
             },
             'wp-donate-button-custom-apparence',
             'wp_dbc_section_apparence'
@@ -292,7 +305,8 @@
             function () {
                 $val = esc_attr(get_option('wp_dbc_set_color_box_shadow_color', '#0073aa'));
                 echo "<input type='color' name='wp_dbc_set_color_box_shadow_color' value='$val' />";
-                echo "<p class='description'>Sélectionnez la couleur de l'ombre du bouton.</p>";
+                echo "<p class='description'>Personnalisez la couleur de l'ombre du bouton de don.
+                    <br/>Sélectionnez une couleur parmi la palette de couleurs.</p>";
             },
             'wp-donate-button-custom-apparence',
             'wp_dbc_section_apparence'
@@ -302,9 +316,10 @@
             'wp_dbc_set_color_box_shadow_opacity',
             'Opacité de l\'ombre du bouton',
             function () {
-                $val = esc_attr(get_option('wp_dbc_set_color_box_shadow_opacity', '0.5'));
-                echo "<input type='number' name='wp_dbc_set_color_box_shadow_opacity' value='$val' min='0' max='1' step='0.1' />";
-                echo "<p class='description'>Valeur entre 0 et 1, avec un pas de 0.1 .</p>";
+                $val = esc_attr(get_option('wp_dbc_set_color_box_shadow_opacity', '0.50'));
+                echo "<input type='number' name='wp_dbc_set_color_box_shadow_opacity' value='$val' min='0' max='1' step='0.01' />";
+                echo "<p class='description'>Personnalisez l'opacité de l'ombre du bouton de don.
+                    <br/>Sélectionnez une valeur entre 0 et 1, avec un pas de 0.01.</p>";
             },
             'wp-donate-button-custom-apparence',
             'wp_dbc_section_apparence'
@@ -315,8 +330,10 @@
             'Surposition du bouton',
             function () {
                 $val = esc_attr(get_option('wp_dbc_set_surposition', '100000000'));
-                echo "<input type='number' name='wp_dbc_set_surposition' style='width:130px;' value='$val' min='0' max='100000000' step='100' />";
-                echo "<p class='description'>Valeur entre 0 et 100 000 000, avec un pas de 100 .</p>";
+                echo "<input type='number' name='wp_dbc_set_surposition' style='width:200px;' value='$val' min='0' max='100000000' step='100' />";
+                echo "<p class='description'>Personnalisez la surposition du bouton de don.
+                    <br/>Sélectionnez une valeur entre 0 et 100000000, avec un pas de 100.
+                    <br/>Grâce à cette valeur, le bouton sera positionné plus au-dessus ou plus en dessous des autres éléments.</p>";
             },
             'wp-donate-button-custom-apparence',
             'wp_dbc_section_apparence'
@@ -339,7 +356,32 @@
                     echo "<option value='$key' $selected>$label</option>";
                 }
                 echo "</select>";
-                echo "<p class='description'>Sélectionnez la position du bouton.</p>";
+                echo "<p class='description'>Personnalisez la position du bouton de don parmi cette liste de positions.
+                    <br/>Vous pouvez choisir entre en bas à droite, en bas à gauche, en haut à droite ou en haut à gauche.</p>";
+            },
+            'wp-donate-button-custom-apparence',
+            'wp_dbc_section_apparence'
+        );
+        // position horizontal & vertical
+        add_settings_field(
+            'wp_dbc_set_position_horizontal',
+            'Position horizontal et vertical du bouton',
+            function () {
+                // desc
+                $description_small = 'Ce champs lis du CSS, ex: 10px ou 1.1em.';
+                // position horizontale
+                $val = esc_attr(get_option('wp_dbc_set_position_horizontal', '20px'));
+                echo "<label><b>Position horizontale</b></label> : ";
+                echo "<input type='text' name='wp_dbc_set_position_horizontal' value='$val' class='regular-text' placeholder='$description_small' />";
+                echo "<br/><br/>";
+                // position verticale
+                $val = esc_attr(get_option('wp_dbc_set_position_vertical', '20px'));
+                echo "<label><b>Position verticale</b></label> : ";
+                echo "<input type='text' name='wp_dbc_set_position_vertical' value='$val' class='regular-text' placeholder='$description_small' />";
+                //
+                echo "<p class='description'>Personnalisez l'espacement horizontal et vertical du bouton de don.
+                    <br/>Vous pouvez utiliser des unités CSS telles que px, em, rem, etc.
+                    <br/>Exemples : 10px, 1.1em, 1.5rem, etc.</p>";
             },
             'wp-donate-button-custom-apparence',
             'wp_dbc_section_apparence'
@@ -362,7 +404,8 @@
                     echo "<option value='$key' $selected>$label</option>";
                 }
                 echo "</select>";
-                echo "<p class='description'><i>Cette option est désactivée pour le moment.</i></p>";
+                echo "<p class='description'><i>Cette option est désactivée pour le moment.
+                <br/>Celle-ci sera développée dans une prochaine version.</i></p>";
             },
             'wp-donate-button-custom-apparence',
             'wp_dbc_section_apparence'
@@ -389,7 +432,11 @@
                 echo "</select>";
                 // Bouton de mise en application qui permet de rafraîchir la page
                 echo "<input type=submit name='wp_dbc_set_icone_wp_dash_save' value='Appliquer le changement' class='button button-secondary' />
-                <p class='description'>Après sélection, le bouton de mise en application permet de rafraîchir la page pour voir le changement.</p>";
+                <p class='description'>Personnalisez le type d'icône du bouton de don.
+                    <br/>Vous pouvez choisir de ne pas afficher d'icône ou entre une icône Dashicon ou une icône WP Media.
+                    <br/>L'icône Dashicon est une icône par défaut de WordPress.
+                    <br/>L'icône WP Media est une image que vous pouvez télécharger dans la bibliothèque de médias de WordPress.
+                    <br/>Après sélection, le bouton de mise en application permet de rafraîchir la page pour voir le changement.</p>";
             },
             'wp-donate-button-custom-contenu',
             'wp_dbc_section_contenu'
@@ -458,11 +505,12 @@
         // wp_dbc_set_texte
         add_settings_field(
             'wp_dbc_set_texte',
-            'Texte du bouton',
+            'Texte principal du bouton',
             function () {
                 $val = esc_attr(get_option('wp_dbc_set_texte', 'Soutenez nous !'));
                 echo "<input type='text' name='wp_dbc_set_texte' value='$val' class='regular-text' />";
-                echo "<p class='description'>Texte du bouton de don.</p>";
+                echo "<p class='description'>Personnalisez le texte principal du bouton de don.
+                    <br/>Exemples : Soutenez nous !, Aidez nous, Participez, etc.</p>";
             },
             'wp-donate-button-custom-contenu',
             'wp_dbc_section_contenu'
@@ -483,7 +531,9 @@
                     echo "<option value='$option' $selected>$option</option>";
                 }
                 echo "</select>";
-                echo "<p class='description'>Sélectionnez le nombre de boutons d'actions à afficher.</p>";
+                echo "<p class='description'>Personnalisez le nombre de boutons d'actions du bouton de don.
+                    <br/>Sélectionnez un nombre entre 1 et 4.
+                    <br/><i>NB : pour qu'un bouton d'action soit affiché, son titre et son lien doivent être renseignés.</i></p>";
             },
             'wp-donate-button-custom-options',
             'wp_dbc_section_options'

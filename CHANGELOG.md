@@ -2,6 +2,12 @@
 
 ## [Final - 1.0.X] - Mise à jour
 
+## [beta - 0.0.11] - Mise à jour de la base du module
+
+- Mise à jour du rendu du bouton de don dans le Front-office du Front-end.
+- Mise à jour de la barre de navigation.
+- Mise à jour de la page de configuration.
+
 ## [beta - 0.0.10] - Mise à jour de la base du module
 
 - Ajout d'un système de suivi de mise à jour du module via [Composer](https://getcomposer.org/) :

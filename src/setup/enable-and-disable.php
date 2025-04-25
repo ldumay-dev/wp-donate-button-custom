@@ -56,9 +56,11 @@
         add_option('wp_dbc_set_color_border_radius', '8px');
         add_option('wp_dbc_set_color_background', '#0073aa');
         add_option('wp_dbc_set_color_box_shadow_color', '#0073aa');
-        add_option('wp_dbc_set_color_box_shadow_opacity', '0.5');
+        add_option('wp_dbc_set_color_box_shadow_opacity', '0.50');
         add_option('wp_dbc_set_surposition', '100000000');
         add_option('wp_dbc_set_position', 'bottom-right');
+        add_option('wp_dbc_set_position_horizontal', '20px');
+        add_option('wp_dbc_set_position_vertical', '20px');
         add_option('wp_dbc_set_effect', 'hover_medium');
         add_option('wp_dbc_set_icone_type', 'icone_wp_dash');
         add_option('wp_dbc_set_icone_wp_dash', 'dashicons-heart');
@@ -90,6 +92,8 @@
         delete_option('wp_dbc_set_color_box_shadow_opacity');
         delete_option('wp_dbc_set_surposition');
         delete_option('wp_dbc_set_position');
+        delete_option('wp_dbc_set_position_horizontal');
+        delete_option('wp_dbc_set_position_vertical');
         delete_option('wp_dbc_set_effect');
         delete_option('wp_dbc_set_icone_type');
         delete_option('wp_dbc_set_icone_wp_dash');
